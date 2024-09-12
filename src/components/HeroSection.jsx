@@ -1,6 +1,9 @@
+import { useState } from "react";
 import HeroImage from "../assets/Hero Image.svg";
 
 function HeroSection() {
+  const [hoveredButton, setHoveredButton] = useState("knowMore"); // Default state set to "knowMore"
+
   return (
     <div
       className="relative flex flex-col items-center px-[8vw] py-[12vh] text-center bg-cover bg-center max-md:px-5 max-md:py-[6vh]"
@@ -19,10 +22,22 @@ function HeroSection() {
         </p>
       </div>
       <div className="flex gap-5 items-center mt-6 text-base font-semibold">
-        <button className="px-9 py-3.5 text-white bg-blue-800 rounded-lg max-md:px-5">
+        <button
+          className={`px-9 py-3.5 rounded-lg max-md:px-5 ${
+            hoveredButton === "knowMore" ? "bg-blue-800 text-white" : "bg-white text-blue-800 border border-blue-800"
+          }`}
+          onMouseEnter={() => setHoveredButton("knowMore")}
+          onMouseLeave={() => setHoveredButton("knowMore")} // Keep first button blue when not hovered
+        >
           Know more
         </button>
-        <button className="px-9 py-3.5 bg-white rounded-lg border border-blue-800 text-slate-800 max-md:px-5">
+        <button
+          className={`px-9 py-3.5 rounded-lg max-md:px-5 ${
+            hoveredButton === "contactUs" ? "bg-blue-800 text-white" : "bg-white text-blue-800 border border-blue-800"
+          }`}
+          onMouseEnter={() => setHoveredButton("contactUs")}
+          onMouseLeave={() => setHoveredButton("knowMore")} // Revert to "knowMore" when leaving
+        >
           Contact Us
         </button>
       </div>
